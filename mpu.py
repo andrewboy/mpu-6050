@@ -70,9 +70,6 @@ class MPU:
         return temp / 340.0 + 36.53
 
     def get_gyro_data(self):
-        #print "gyro data"
-        #print "---------"
-
         gyro_xout = self.read_word_2c(MPU.GYRO_XOUT_H)
         gyro_yout = self.read_word_2c(MPU.GYRO_YOUT_H)
         gyro_zout = self.read_word_2c(MPU.GYRO_ZOUT_H)
@@ -86,10 +83,6 @@ class MPU:
         #print "gyro_zout: ", gyro_zout, " scaled: ", (gyro_zout / 131)
 
     def get_accelerometer_data(self):
-        #print
-        #print "accelerometer data"
-        #print "------------------"
-
         accel_xout = self.read_word_2c(MPU.ACCEL_XOUT_H)
         accel_yout = self.read_word_2c(MPU.ACCEL_YOUT_H)
         accel_zout = self.read_word_2c(MPU.ACCEL_ZOUT_H)
@@ -98,14 +91,7 @@ class MPU:
         accel_yout_scaled = accel_yout / 16384.0
         accel_zout_scaled = accel_zout / 16384.0
 
-        #print "accel_xout: ", accel_xout, " scaled: ", accel_xout_scaled
-        #print "accel_yout: ", accel_yout, " scaled: ", accel_yout_scaled
-        #print "accel_zout: ", accel_zout, " scaled: ", accel_zout_scaled
-
         x_rotation =  self.get_x_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
         y_rotation =  self.get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
-
-        #print "x rotation: ", x_rotation
-        #print "y rotation: ", y_rotation
 
         return [x_rotation, y_rotation]
